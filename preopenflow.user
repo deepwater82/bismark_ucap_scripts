@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# veth devices
+local veth0=`ifconfig | grep 'veth0' -c`                   
+if [ $veth0 -eq 0 ]; then                                  
+	vethd -v veth0 -e eth0.2
+fi                                               
+
+local veth1=`ifconfig | grep 'veth1' -c`
+if [ $veth1 -eq 0 ]; then               
+	vethd -v veth1 -e eth0.2 -m C4:3D:C7:B0:AE:9F
+fi 
+ifconfig veth0 up
+ifconfig veth1 up

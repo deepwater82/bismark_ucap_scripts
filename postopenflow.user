@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# bridge
+brctl addif br-lan veth1
+brctl delif br-lan eth0.1
+
+# routing table 
+ip rule add iif wlan0 table joon
+ip rule add iif wlan1 table joon
+ip rule add iif eth0.1 table joon
+ip route add blackhole default table joon
+ip route flush cache
