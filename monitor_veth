@@ -2,7 +2,12 @@
 
 # monitor veth
 while [ 1 ]; do
-	local veth_num=`ls /proc/7615/net/dev_snmp6 | grep veth -c`
+	local dirc=`ls /proc/net/dev_snmp6 | grep "eth1" -c`
+    if [ $dirc -eq 0 ]; then
+        echo "Wrong Directory! Kill script."
+        break
+    fi
+	local veth_num=`ls /proc/net/dev_snmp6 | grep "veth" -c`
 	if [ $veth_num -ne 2 ]; then
 		local wlan0_num=`ip rule show | grep 'iif wlan0 lookup' -c`
 		if [ $wlan0_num -ne 0 ]; then
