@@ -52,5 +52,5 @@ uci commit wireless
 uci commit network
 
 /etc/init.d/network restart
-brctl addif br-lan eth0.1
 ifconfig eth0.1 up
+brctl addif br-lan eth0.1
