@@ -24,10 +24,10 @@ do
 	ip rule del iif wlan1
 done
 
-# clean routing table for "joon"
-local rtbl=`ip route show table joon | grep 'blackhole' -c`
+# clean routing table for "ucap_rt"
+local rtbl=`ip route show table ucap_rt | grep 'blackhole' -c`
 if [ $rtbl -ne 0 ]; then
-	ip route del blackhole default table joon
+	ip route del blackhole default table ucap_rt
 	ip route flush cache
 fi
 
