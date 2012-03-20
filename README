@@ -11,7 +11,7 @@ README - ucap enable/disable scripts
 * disable_ucap.sh
   - run when ucap is disabled in UI
 
-* monitor_veth
+* monitor_veth.sh
   - script for monitoring existence of veth devices. 
     This is because veth devices go down when "/etc/init.d/network" is restarted.
 

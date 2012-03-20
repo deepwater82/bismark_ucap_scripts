@@ -2,7 +2,10 @@
 
 # bridge
 brctl addif br-lan veth1
-brctl delif br-lan eth0.1
+local delif=`brctl show | grep br-lan | grep eth0.1 -c`
+if [ $delif -eq 1 ]; then
+    brctl delif br-lan eth0.1
+fi                                               
 
 # routing table 
 ip rule add iif wlan0 table ucap_rt

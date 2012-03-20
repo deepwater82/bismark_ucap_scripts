@@ -1,15 +1,24 @@
 #!/bin/sh
 
-# veth devices
-local veth0=`ifconfig | grep 'veth0' -c`                   
-if [ $veth0 -eq 0 ]; then                                  
+# veth device veth0
+local veth0=`ifconfig | grep 'veth0' -c`
+if [ $veth0 -eq 0 ]; then
 	vethd -v veth0 -e eth0.2
-fi                                               
+fi
 
+# Check bridge. If not present, create.
+local brg=`ifconfig | grep 'br-lan' -c`
+if [ $brg -eq 0 ]; then
+    brctl addbr br-lan
+    ifconfig br-lan up
+    brctl addif br-lan eth0.1
+fi
+
+# veth device veth1
 local veth1=`ifconfig | grep 'veth1' -c`
-if [ $veth1 -eq 0 ]; then               
+if [ $veth1 -eq 0 ]; then
     local macaddr=`ifconfig br-lan | grep HWaddr | awk '{print $5}'`
-	vethd -v veth1 -e eth0.2 -m $macaddr
+    vethd -v veth1 -e eth0.2 -m $macaddr
 fi 
 ifconfig veth0 up
 ifconfig veth1 up

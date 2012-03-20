@@ -1,5 +1,11 @@
 #!/bin/sh 
 
+# kill monitoring script
+local check=`pgrep -fl monitor_veth`
+if [ "$check" != "" ]; then
+    pkill -f monitor_veth.sh
+fi
+
 # check for existing ip rules
 local wlan0_num=`ip rule show | grep 'iif wlan0 lookup' -c`
 local wlan1_num=`ip rule show | grep 'iif wlan1 lookup' -c`
