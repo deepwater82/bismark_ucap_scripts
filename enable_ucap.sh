@@ -31,5 +31,5 @@ uci commit openflow
 # Start monitoring script
 local check=`pgrep -fl monitor_veth`
 if [ "$check" == "" ]; then
-    sh /root/monitor_veth.sh &
+    sh /usr/bin/monitor_veth.sh &
 fi
