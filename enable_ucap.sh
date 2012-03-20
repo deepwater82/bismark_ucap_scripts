@@ -5,7 +5,7 @@ local wl0=`uci get wireless.@wifi-iface[0].network -q`
 local wl1=`uci get wireless.@wifi-iface[1].network -q`     
 local ifname=`uci get network.lan.ifname -q`
 
-if [ "$wl0" != "lan" ] || [ "$wl1" != "lan" ] || [ "$ifname" != "lan" ]; then
+if [ "$wl0" != "" ] || [ "$wl1" != "" ] || [ "$ifname" != "" ]; then
     uci set wireless.@wifi-iface[0].network=''
     uci set wireless.@wifi-iface[1].network=''
     uci set network.lan.ifname=''
